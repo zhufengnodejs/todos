@@ -1,0 +1,23 @@
+{
+  "name": "todos",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "zhufengnodejs <zhufengnodejs@126.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular-route": "^1.5.8",
+    "angular-resource": "^1.5.8"
+  }
+}

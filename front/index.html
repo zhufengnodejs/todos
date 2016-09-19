@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>待办事项</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .completed{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body style="margin-top: 30px">
+<div class="container" ng-view>
+
+</div>
+<script type="text/ng-template" id="todoPage.html">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <tr>
+                    <td colspan="3">
+                        <form ng-submit="createTodo()">
+                            <input type="text" class="form-control" ng-model="newTodo">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="all" ng-click="checkAll(all)">全选</label>
+                        </div>
+                    </td>
+                    <td>事项名称</td>
+                    <td>操作</td>
+                </tr>
+                <tr ng-repeat="todo in todos | filter:statusFilter track by $index">
+                    <td>
+                        <div class="checkbox">
+                            <label><input class="btn-lg" type="checkbox" ng-model="todo.completed" ng-change="toggle(todo)"></label>
+                        </div>
+                    </td>
+                    <td ng-class="{completed:todo.completed}">
+                        {{todo.title}}
+                    </td>
+                    <td>
+                        <button class="btn-danger" ng-click="delete(todo)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>还有{{remainingCount}}件事未完成</td>
+                    <td>
+                        <nav>
+                            <ul class="pagination">
+                                <li ng-class="{active:status==''}"><a href="#/">全部</a></li>
+                                <li ng-class="{active:status=='active'}"><a href="#/active">未完成</a></li>
+                                <li ng-class="{active:status=='completed'}"><a href="#/completed">已完成</a></li>
+                            </ul>
+                        </nav>
+                    </td>
+                    <td>
+                        <button ng-show="completedCount" ng-click="clear()" class="btn btn-danger">清空已完成</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</script>
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-route/angular-route.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="app.js"></script>
+<script src="services/todoService.js"></script>
+<script src="controllers/todoController.js"></script>
+</body>
+</html>
